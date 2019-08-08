@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Subject} from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-high-low-keys',
@@ -7,19 +9,28 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitte
 })
 export class HighLowKeysComponent implements OnInit {
   
-  constructor() { }
+  constructor() {
+    this.highKeySearchChanged
+      .pipe(debounceTime(500))
+    .subscribe((newValue) => {
+      // TODO change length check to a configurable param
+      if(newValue.length >= 3) {
+        console.log("fetching results now");
+        this.fetchResultsWithFilter.emit(this.highKeySearch);
+      }
+    })  
+  }
 
   @Input() optsComplete: Array<Object>;
   @Output() fetchResultsWithFilter: EventEmitter<string> = new EventEmitter<string>();
 
   highLevelOpts: Array<String> = [];
   highKeySearch: string = '';
+  private highKeySearchChanged = new Subject<string>();
 
-  updateSearch(newValue) {
-    // TODO change length check to a configurable param
-    if(newValue.length >= 3) {
-      this.fetchResultsWithFilter.emit(this.highKeySearch);
-    }
+  updateSearch(newValue) {    
+    console.log("text input updated");
+    this.highKeySearchChanged.next(newValue);
   }
 
   ngOnInit() { }
