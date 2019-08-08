@@ -1,26 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { MockDataService } from './core/mock-data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'high-low-keys';
-  highLowSoundKeys: Array<Object> = [
-    {
-      value: "Spider Monkey",
-      subOpts: [
-        "Bark",
-        "Whinny",
-        "Chitter",
-        "Whoop"
-      ],
-    },
-    { value: "Howler Monkey", subOpts: [], },
-    { value: "Chainsaw", subOpts: [], },
-    { value: "Capuchin Monkey", subOpts: [], },
-    { value: "Squirrel Monkey", subOpts: [], },
-    { value: "Gunshot", subOpts: [], },
-  ];
+  highLowSoundKeys: Object[] = [];
+
+  constructor(private mockDataService: MockDataService) {}
+
+  ngOnInit() {
+    this.mockDataService.getSounds('')
+      .subscribe((sounds: Object[]) => this.highLowSoundKeys = sounds);
+  }
+
 }

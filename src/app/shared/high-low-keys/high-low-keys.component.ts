@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-high-low-keys',
@@ -10,13 +10,17 @@ export class HighLowKeysComponent implements OnInit {
 
   highLevelOpts: Array<String> = [];
 
-  highKey: string = '';
+  highKeySearch: string = '';
   lowKey: string = '';
 
   constructor() { }
 
-  ngOnInit() {
-    this.highLevelOpts = this.optsComplete.map(o => o['value']);
+  ngOnInit() { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.optsComplete) {
+      this.highLevelOpts = this.optsComplete.map(o => o['value']);
+    }
   }
 
 }
