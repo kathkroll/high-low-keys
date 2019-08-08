@@ -13,9 +13,11 @@ export class AppComponent implements OnInit {
 
   constructor(private mockDataService: MockDataService) {}
 
-  ngOnInit() {
-    this.mockDataService.getSounds('')
+  fetchSounds(searchFor: string) {
+    this.mockDataService.getSounds(searchFor)
       .subscribe((sounds: Object[]) => this.highLowSoundKeys = sounds);
   }
+
+  ngOnInit() { }
 
 }

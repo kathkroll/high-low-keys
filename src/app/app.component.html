@@ -1,1 +1,5 @@
-<app-high-low-keys [optsComplete]="highLowSoundKeys"></app-high-low-keys>
+<app-high-low-keys 
+  [optsComplete]="highLowSoundKeys"
+  (fetchResultsWithFilter)="fetchSounds($event)"
+>
+</app-high-low-keys>

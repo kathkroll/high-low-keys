@@ -1,5 +1,5 @@
 <div class="high-key-container">
-  <input type="text" [(ngModel)]="highKey"/>
+  <input type="text" [(ngModel)]="highKeySearch" (ngModelChange)="updateSearch($event)"/>
   <app-opts-list [opts]="highLevelOpts"></app-opts-list>
 </div>
 <select [hidden]="!highKey">
