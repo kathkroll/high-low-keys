@@ -8,6 +8,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Using the Component
 
+#### Example
 ```
 <app-high-low-keys 
   [optsComplete]="highLowSoundKeys"
@@ -28,5 +29,8 @@ interface IHighLowKeyOption {
 }
 ```
 
+`fetchResultsWithFilter` is the emitted event that passes a string filter that the calling code should use to get the updated `IHighLowKeyOption[]` to pass as `optsComplete`
+
+`keysSelected` is the emitted event that passes back both the high-level key and the low-level key whenever either one of them changes.
 
 
