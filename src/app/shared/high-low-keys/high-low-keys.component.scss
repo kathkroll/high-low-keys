@@ -1,8 +1,6 @@
-$border-radius: 5px;
-
 input, textarea, select { 
   font-family:inherit;
-  border-radius: $border-radius;
+  border-radius: 5px;
   border: 1px solid #adadad;
   padding: 5px;
   cursor: pointer;
