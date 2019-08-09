@@ -8,21 +8,25 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Using the Component
 
-`<app-high-low-keys 
-    [optsComplete]="highLowSoundKeys"
-    (fetchResultsWithFilter)="fetchSounds($event)"
-    (keysSelected)="soundSelectionUpdated($event)"
-  >
-  </app-high-low-keys>`
+```
+<app-high-low-keys 
+  [optsComplete]="highLowSoundKeys"
+  (fetchResultsWithFilter)="fetchSounds($event)"
+  (keysSelected)="soundSelectionUpdated($event)"
+>
+</app-high-low-keys>
+```
 
 ### Where...
 
 `optsComplete` is the complete list of options (pre-filtered by server) for the component to render. `optsComplete` is an array of `IHighLowKeyOption`:
 
-`interface IHighLowKeyOption {
+```javascript
+interface IHighLowKeyOption {
   value: string;
   subOpts: string[];
-}`
+}
+```
 
 
 
