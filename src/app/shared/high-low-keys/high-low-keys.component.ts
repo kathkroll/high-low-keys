@@ -2,6 +2,8 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitte
 import { Subject} from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
+import { ISelectedKeys, IHighLowKeyOptions } from './interfaces'
+
 @Component({
   selector: 'app-high-low-keys',
   templateUrl: './high-low-keys.component.html',
