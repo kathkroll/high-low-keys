@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Subject} from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -16,10 +16,12 @@ export class HighLowKeysComponent implements OnInit {
       .pipe(debounceTime(500))
     .subscribe((newValue) => {
       // TODO change length check to a configurable param
-      this.selectedKeys.highKey = '';
+      this.resetDefault();
       if(newValue.length >= 3) {
         console.log("fetching results now");
         this.fetchResultsWithFilter.emit(this.highKeySearch);
+      } else {
+        this.highLevelOpts = [];
       }
     })  
   }
@@ -35,12 +37,23 @@ export class HighLowKeysComponent implements OnInit {
     highKey: '',
     lowKey: ''
   }
+  focusedOptIndex: number = 0;
 
   private highKeySearchChanged = new Subject<string>();
 
   updateSearch(newValue) {    
     console.log("text input updated");
     this.highKeySearchChanged.next(newValue);
+  }
+
+  resetDefault() {
+    this.selectedKeys = {
+      highKey: '',
+      lowKey: ''
+    }
+    this.selectedSubOpts = [];
+    this.focusedOptIndex = 0;
+    this.onKeysSelected.emit(this.selectedKeys);
   }
 
   highKeySelected(selected: string) {
@@ -52,6 +65,26 @@ export class HighLowKeysComponent implements OnInit {
   lowKeySelected(selected: string) {
     this.selectedKeys.lowKey = selected;
     this.onKeysSelected.emit(this.selectedKeys);
+  }
+
+  updateFocusedOptIndex(newIndex: number) {
+    this.focusedOptIndex = newIndex;
+  }
+
+  incrementFocusedOptIndex() {
+    if(this.focusedOptIndex < this.highLevelOpts.length - 1) {
+      this.updateFocusedOptIndex(this.focusedOptIndex+1);
+    }  
+  }
+
+  decrementFocusedOptIndex() {
+    if(this.focusedOptIndex > 0) {
+      this.updateFocusedOptIndex(this.focusedOptIndex-1);
+    } 
+  }
+
+  setCurrentIndexAsSelected() {
+    this.highKeySelected(this.highLevelOpts[this.focusedOptIndex]);
   }
 
   ngOnInit() { }

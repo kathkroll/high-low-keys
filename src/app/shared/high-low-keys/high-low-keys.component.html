@@ -4,12 +4,22 @@
       [(ngModel)]="highKeySearch"
       (ngModelChange)="updateSearch($event)"
       placeholder="Search"
+      (keydown.arrowdown)="incrementFocusedOptIndex()"
+      (keydown.arrowup)="decrementFocusedOptIndex()"
+      (keydown.enter)="setCurrentIndexAsSelected()"
     />
-    <app-opts-list *ngIf="!selectedKeys.highKey" [opts]="highLevelOpts" (onKeySelected)="highKeySelected($event)"></app-opts-list>
+    <app-opts-list
+      *ngIf="!selectedKeys.highKey && highLevelOpts.length"
+      [opts]="highLevelOpts"
+      [focusedOptIndex]="focusedOptIndex"
+      (onKeySelected)="highKeySelected($event)"
+      (focusedOptIndexUpdated)="updateFocusedOptIndex($event)"
+    ></app-opts-list>
   </div>
   <div class="low-key-container" [class.expanded]="selectedKeys.highKey && selectedSubOpts.length">
-    <select *ngIf="selectedKeys.highKey && selectedSubOpts.length">
-      <option *ngFor="let subOpt of selectedSubOpts" value="subOpt">
+    <select *ngIf="selectedKeys.highKey && selectedSubOpts.length" (change)="lowKeySelected($event.target.value)">
+      <option hidden disabled selected value>Choose Characteristic</option>
+      <option *ngFor="let subOpt of selectedSubOpts" [value]="subOpt">
         {{ subOpt }}
       </option>
     </select>

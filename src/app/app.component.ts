@@ -11,9 +11,11 @@ export class AppComponent implements OnInit {
   title = 'high-low-keys';
   highLowSoundKeys: Object[] = [];
   selectedHighKeySound: string = "";
+  selectedLowKeySound: string= "";
 
   soundSelectionUpdated(newKeys: object) {
     this.selectedHighKeySound = newKeys['highKey'];
+    this.selectedLowKeySound = newKeys['lowKey'];
   }
 
   constructor(private mockDataService: MockDataService) {}

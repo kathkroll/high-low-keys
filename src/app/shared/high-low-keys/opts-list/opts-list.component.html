@@ -1,5 +1,9 @@
 <div class="opts-list-dropdown">
-  <div *ngFor="let opt of opts" (click)="selectKey(opt)" class="opt">
+  <div *ngFor="let opt of opts; index as i"
+  	(click)="selectKey(opt)"
+    [ngClass]="{'opt': true, 'focused': i === focusedOptIndex}"
+    (mouseover)="setNewFocusedOptIndex(i)"
+  >
     {{ opt }}
   </div>
 </div>

@@ -11,5 +11,9 @@
 
   .opt {
     padding: 5px 10px;
+
+    &.focused {
+      background: #dbdbdb;
+    }
   }
 }

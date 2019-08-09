@@ -7,13 +7,20 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class OptsListComponent implements OnInit {
   @Input() opts: Array<String>;
+  @Input() focusedOptIndex: number;
   @Output() onKeySelected: EventEmitter<string> = new EventEmitter<string>();
+  @Output() focusedOptIndexUpdated: EventEmitter<number> = new EventEmitter<number>();
+
 
   selectKey(selected: string) {
     this.onKeySelected.emit(selected);
   }
 
-  constructor() { }
+  setNewFocusedOptIndex(newIndex: number) {
+    this.focusedOptIndexUpdated.emit(newIndex);
+  }
+
+  constructor() {}
 
   ngOnInit() {
   }
