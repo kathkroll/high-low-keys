@@ -12,7 +12,7 @@
       *ngIf="!selectedKeys.highKey && highLevelOpts.length"
       [opts]="highLevelOpts"
       [focusedOptIndex]="focusedOptIndex"
-      (onKeySelected)="highKeySelected($event)"
+      (newKeySelected)="highKeySelected($event)"
       (focusedOptIndexUpdated)="updateFocusedOptIndex($event)"
     ></app-opts-list>
   </div>

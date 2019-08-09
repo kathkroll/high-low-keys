@@ -1,9 +1,9 @@
 export interface ISelectedKeys {
-	highKey: string;
-	lowKey: string;
+  highKey: string;
+  lowKey: string;
 }
 
-export interface IHighLowKeyOptions {
+export interface IHighLowKeyOption {
   value: string;
   subOpts: string[];
 }

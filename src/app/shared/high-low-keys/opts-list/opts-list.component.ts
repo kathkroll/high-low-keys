@@ -6,14 +6,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./opts-list.component.scss']
 })
 export class OptsListComponent implements OnInit {
-  @Input() opts: Array<String>;
+  @Input() opts: Array<string>;
   @Input() focusedOptIndex: number;
-  @Output() onKeySelected: EventEmitter<string> = new EventEmitter<string>();
+  @Output() newKeySelected: EventEmitter<string> = new EventEmitter<string>();
   @Output() focusedOptIndexUpdated: EventEmitter<number> = new EventEmitter<number>();
 
 
   selectKey(selected: string) {
-    this.onKeySelected.emit(selected);
+    this.newKeySelected.emit(selected);
   }
 
   setNewFocusedOptIndex(newIndex: number) {

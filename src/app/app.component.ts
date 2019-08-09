@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MockDataService } from './core/mock-data.service';
+import { ISelectedKeys, IHighLowKeyOption } from './shared/high-low-keys/interfaces';
 
 @Component({
   selector: 'app-root',
@@ -9,20 +10,20 @@ import { MockDataService } from './core/mock-data.service';
 })
 export class AppComponent implements OnInit {
   title = 'high-low-keys';
-  highLowSoundKeys: Object[] = [];
-  selectedHighKeySound: string = "";
-  selectedLowKeySound: string= "";
+  highLowSoundKeys: object[] = [];
+  selectedHighKeySound = '';
+  selectedLowKeySound = '';
 
-  soundSelectionUpdated(newKeys: object) {
-    this.selectedHighKeySound = newKeys['highKey'];
-    this.selectedLowKeySound = newKeys['lowKey'];
+  soundSelectionUpdated(newKeys: ISelectedKeys) {
+    this.selectedHighKeySound = newKeys.highKey;
+    this.selectedLowKeySound = newKeys.lowKey;
   }
 
   constructor(private mockDataService: MockDataService) {}
 
   fetchSounds(searchFor: string) {
     this.mockDataService.getSounds(searchFor)
-      .subscribe((sounds: Object[]) => this.highLowSoundKeys = sounds);
+      .subscribe((sounds: IHighLowKeyOption[]) => this.highLowSoundKeys = sounds);
   }
 
   ngOnInit() { }
