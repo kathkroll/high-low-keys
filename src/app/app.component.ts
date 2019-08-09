@@ -10,6 +10,11 @@ import { MockDataService } from './core/mock-data.service';
 export class AppComponent implements OnInit {
   title = 'high-low-keys';
   highLowSoundKeys: Object[] = [];
+  selectedHighKeySound: string = "";
+
+  soundSelectionUpdated(newKeys: object) {
+    this.selectedHighKeySound = newKeys['highKey'];
+  }
 
   constructor(private mockDataService: MockDataService) {}
 

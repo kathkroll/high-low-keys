@@ -1,8 +1,11 @@
 <div class="high-key-container">
-  <input type="text" [(ngModel)]="highKeySearch" (ngModelChange)="updateSearch($event)"/>
-  <app-opts-list [opts]="highLevelOpts"></app-opts-list>
+  <input type="text" [(ngModel)]="highKeySearch" (ngModelChange)="updateSearch($event)" placeholder="Search"/>
+  <app-opts-list *ngIf="!selectedKeys.highKey" [opts]="highLevelOpts" (onKeySelected)="highKeySelected($event)"></app-opts-list>
 </div>
-<select [hidden]="!highKey">
+<select *ngIf="selectedKeys.highKey && selectedSubOpts.length">
+  <option *ngFor="let subOpt of selectedSubOpts" value="subOpt">
+    {{ subOpt }}
+  </option>
 </select>
 
 

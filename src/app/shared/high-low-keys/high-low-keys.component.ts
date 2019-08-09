@@ -14,6 +14,7 @@ export class HighLowKeysComponent implements OnInit {
       .pipe(debounceTime(500))
     .subscribe((newValue) => {
       // TODO change length check to a configurable param
+      this.selectedKeys.highKey = '';
       if(newValue.length >= 3) {
         console.log("fetching results now");
         this.fetchResultsWithFilter.emit(this.highKeySearch);
@@ -21,16 +22,34 @@ export class HighLowKeysComponent implements OnInit {
     })  
   }
 
-  @Input() optsComplete: Array<Object>;
+  @Input() optsComplete: IHighLowKeyOptions[];
   @Output() fetchResultsWithFilter: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onKeysSelected: EventEmitter<ISelectedKeys> = new EventEmitter<ISelectedKeys>();
 
-  highLevelOpts: Array<String> = [];
+  highLevelOpts: Array<string> = [];
+  selectedSubOpts: Array<string> = [];
   highKeySearch: string = '';
+  selectedKeys: ISelectedKeys = {
+    highKey: '',
+    lowKey: ''
+  }
+
   private highKeySearchChanged = new Subject<string>();
 
   updateSearch(newValue) {    
     console.log("text input updated");
     this.highKeySearchChanged.next(newValue);
+  }
+
+  highKeySelected(selected: string) {
+    this.selectedKeys.highKey = this.highKeySearch = selected;
+    this.selectedSubOpts = this.optsComplete.find(k => k.value === selected).subOpts;
+    this.onKeysSelected.emit(this.selectedKeys);
+  }
+
+  lowKeySelected(selected: string) {
+    this.selectedKeys.lowKey = selected;
+    this.onKeysSelected.emit(this.selectedKeys);
   }
 
   ngOnInit() { }
