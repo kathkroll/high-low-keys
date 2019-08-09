@@ -10,7 +10,7 @@ Then run `npm install`.
 
 Then run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. You should see a page that looks like this:
 
-![Image of UI](https://github.com/kathkroll/reference.PNG)
+![Image of UI](https://github.com/kathkroll/high-low-keys/reference.PNG)
 
 ## Using the Component
 
