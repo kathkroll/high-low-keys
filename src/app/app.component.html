@@ -1,9 +1,12 @@
-<app-high-low-keys 
-  [optsComplete]="highLowSoundKeys"
-  (fetchResultsWithFilter)="fetchSounds($event)"
-  (onKeysSelected)="soundSelectionUpdated($event)"
->
-</app-high-low-keys>
+<div class="demo-container">
+  <app-high-low-keys 
+    [optsComplete]="highLowSoundKeys"
+    (fetchResultsWithFilter)="fetchSounds($event)"
+    (onKeysSelected)="soundSelectionUpdated($event)"
+  >
+  </app-high-low-keys>
 
-<div>The selected high key is: {{ selectedHighKeySound }}</div>
+  <div>The selected high key is: {{ selectedHighKeySound }}</div>
+</div>
+
 

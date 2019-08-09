@@ -1,11 +1,19 @@
-<div class="high-key-container">
-  <input type="text" [(ngModel)]="highKeySearch" (ngModelChange)="updateSearch($event)" placeholder="Search"/>
-  <app-opts-list *ngIf="!selectedKeys.highKey" [opts]="highLevelOpts" (onKeySelected)="highKeySelected($event)"></app-opts-list>
+<div class="high-low-keys-container">
+  <div class="high-key-container" [class.full-width]="selectedSubOpts.length === 0">
+    <input type="text"
+      [(ngModel)]="highKeySearch"
+      (ngModelChange)="updateSearch($event)"
+      placeholder="Search"
+    />
+    <app-opts-list *ngIf="!selectedKeys.highKey" [opts]="highLevelOpts" (onKeySelected)="highKeySelected($event)"></app-opts-list>
+  </div>
+  <div class="low-key-container" [class.expanded]="selectedKeys.highKey && selectedSubOpts.length">
+    <select *ngIf="selectedKeys.highKey && selectedSubOpts.length">
+      <option *ngFor="let subOpt of selectedSubOpts" value="subOpt">
+        {{ subOpt }}
+      </option>
+    </select>
+  </div>
 </div>
-<select *ngIf="selectedKeys.highKey && selectedSubOpts.length">
-  <option *ngFor="let subOpt of selectedSubOpts" value="subOpt">
-    {{ subOpt }}
-  </option>
-</select>
 
 

@@ -1,3 +1,6 @@
-<div *ngFor="let opt of opts" (click)="selectKey(opt)">
-  {{ opt }}
+<div class="opts-list-dropdown">
+  <div *ngFor="let opt of opts" (click)="selectKey(opt)" class="opt">
+    {{ opt }}
+  </div>
 </div>
+
