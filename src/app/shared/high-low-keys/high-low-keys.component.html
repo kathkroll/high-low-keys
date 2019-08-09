@@ -1,5 +1,5 @@
 <div class="high-low-keys-container">
-  <div class="high-key-container" [class.full-width]="selectedSubOpts.length === 0">
+  <div class="high-key-container" [class.full-width]="selectedSubOpts.length <= 1">
     <input type="text"
       [(ngModel)]="highKeySearch"
       (ngModelChange)="updateSearch($event)"
@@ -16,8 +16,8 @@
       (focusedOptIndexUpdated)="updateFocusedOptIndex($event)"
     ></app-opts-list>
   </div>
-  <div class="low-key-container" [class.expanded]="selectedKeys.highKey && selectedSubOpts.length">
-    <select *ngIf="selectedKeys.highKey && selectedSubOpts.length" (change)="lowKeySelected($event.target.value)">
+  <div class="low-key-container" [class.expanded]="selectedKeys.highKey && selectedSubOpts.length > 1">
+    <select *ngIf="selectedKeys.highKey && selectedSubOpts.length > 1" (change)="lowKeySelected($event.target.value)">
       <option hidden disabled selected value>Choose Characteristic</option>
       <option *ngFor="let subOpt of selectedSubOpts" [value]="subOpt">
         {{ subOpt }}

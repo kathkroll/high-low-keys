@@ -8,7 +8,7 @@
       "Whoop"
     ]
   },
-  { "value": "Howler Monkey", "subOpts": [] },
+  { "value": "Howler Monkey", "subOpts": ["Howl"] },
   { "value": "Chainsaw", "subOpts": [] },
   { "value": "Capuchin Monkey", "subOpts": [] },
   { "value": "Squirrel Monkey", "subOpts": [] },
